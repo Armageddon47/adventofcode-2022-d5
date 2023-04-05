@@ -1,4 +1,6 @@
 crates = [[]]
+num_list = []
+
 with open('input.txt' , 'r') as f:
 
     guardian = False
@@ -12,10 +14,10 @@ with open('input.txt' , 'r') as f:
                 row = []
                 crates.append(row)
             getLen = True
+            crates.pop()
             
         
         if (guardian):
-            num_list = []
 
             nums = [int(num) for num in r.split() if num.isdigit()]
             if len(nums) == 3:
@@ -36,7 +38,35 @@ with open('input.txt' , 'r') as f:
                 crates[counter].append(r[i])
             i += 4
             counter += 1 
+            
+            
+# Loop over the rows in reverse order and swap them
+for i in range(len(crates)):
+    crates[i] = crates[i][::-1]
                        
-        
+def MoveCrates(crates,numbers):
+    for i in numbers:
+        i[1] -=1
+        i[2] -=1
+        reverse1 = crates[i[1]][-(i[0]):]
+        reverse1 = reverse1[::-1] 
+        crates[i[2]] += reverse1
 
+        crates[i[1]] = crates[i[1]][:-(i[0])]
+        
+        
+  
+    
+    
+            
+print(num_list)
 print (crates)
+
+print("###############################")
+MoveCrates(crates,num_list)
+output = []
+for i in crates:
+    output.append(i[-1])
+    print(i[-1])
+    
+print(output)
